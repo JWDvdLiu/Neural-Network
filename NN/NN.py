@@ -39,6 +39,7 @@ class NeuralNetwork:
             Z = tf.matmul(A, tf.transpose(self.W[i])) + tf.transpose(self.b[i])
             if i != self.L-1:
                 A = tf.nn.relu(Z)
+                #A = tf.math.sigmoid(Z)
             else:
                 A = Z
         return A
@@ -122,12 +123,13 @@ net = NeuralNetwork([784, 128, 128, 10])
 net.info()
 
 batch_size = 120
-epochs = 5
+epochs = 3
 steps_per_epoch = int(x_train.shape[0]/batch_size)
 lr = 3e-3
 print('Steps per epoch', steps_per_epoch)
 
 history = net.train(
+
     x_train, y_train,
     x_test, y_test,
     epochs, steps_per_epoch,
