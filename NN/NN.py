@@ -25,6 +25,14 @@ class NeuralNetwork:
             self.W[i] = tf.Variable(tf.random.normal(shape=(self.layers[i], self.layers[i-1])))
             self.b[i] = tf.Variable(tf.random.normal(shape=(self.layers[i], 1)))
 
+    def activation_fun(self, X):
+        #sigmoid
+        #X = 1/(1+np.exp(-X))
+
+        #reLu
+        X = np.maximum(0,X)
+        return tf.convert_to_tensor(X, dtype=tf.float32)
+
     def forward_pass(self, X):
         A = tf.convert_to_tensor(X, dtype=tf.float32)
         for i in range(1, self.L):
